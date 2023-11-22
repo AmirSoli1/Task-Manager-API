@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const port = 3000;
 
 const tasksRouter = require('./routes/tasks');
 const connectDB = require('./db/connect');
@@ -14,6 +13,7 @@ app.use('/api/v1/tasks', tasksRouter);
 app.use(notFound);
 app.use(errorHandler);
 
+const port = process.env.PORT || 3000;
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
