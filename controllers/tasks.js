@@ -33,8 +33,14 @@ const updtaeTask = (req, res) => {
   res.send('Task updated');
 };
 
-const deleteTask = (req, res) => {
-  res.send('Task deleted.');
+const deleteTask = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Task.findOneAndDelete({ _id: id });
+    res.status(200).json({ status: 'success', data: null });
+  } catch (err) {
+    res.status(500).json({ msg: err });
+  }
 };
 
 module.exports = {
